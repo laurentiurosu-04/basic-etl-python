@@ -8,8 +8,8 @@ import datetime
 import sqlite3
 
 DATABASE_LOCATION = 'sqlite:///my_played_tracks.sqlite'
-USER_ID = ''
-TOKEN = ''
+USER_ID = '31mibmh2agzvoj464raxvhazgi2a'
+TOKEN = 'BQByNq3Njkjhnp-36NYs7i84CwdyaJ5S2GT8D7TQx6KVxioQSk3daapNQR0ed7AP6mpu8sEguAkPEzbBlnFRWcNldd4oz-v9ebhqvSrUkDtpQ3v5e5OJkxIwHGHlFa45mhgn5sQasdvx79y2bzc2K-xJLuyYI0mLahVmQQdB'
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
@@ -73,19 +73,18 @@ if __name__ == '__main__':
         played_at_list.append(song["played_at"])
         timestamps.append(song["played_at"][0:10])
 
-    # Prepare a dictionary in order to turn it into a pandas dataframe below
-    song_dict = {
-        "song_name": song_names,
-        "artist_name": artist_names,
-        "played_at": played_at_list,
-        "timestamp": timestamps
-    }
+    # Prepare a dictionary generator in order to turn it into a pandas dataframe below
+    def dict_generator():
+        yield 'song_name', song_names
+        yield 'artist_name', artist_names,
+        yield 'played_at', played_at_list
+        yield 'timestamp', timestamps
 
-    # for x,y in song_dict.items():
-    #   print(x,y)
+    def make_generator_dictionary(): return dict(dict_generator())
+    print('dict_generator', make_generator_dictionary())
 
-    song_df = pd.DataFrame(song_dict, columns=['song_name', 'artist_name', 'played_at', 'timestamp'])
-    print(song_df.to_string())
+    song_df = pd.DataFrame(make_generator_dictionary(), columns=['song_name', 'artist_name', 'played_at', 'timestamp'])
+    print('song_df: ', song_df.to_string())
 
     # Validate
     if check_if_valid_data(song_df):
