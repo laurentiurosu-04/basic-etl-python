@@ -8,8 +8,8 @@ import datetime
 import sqlite3
 
 DATABASE_LOCATION = 'sqlite:///my_played_tracks.sqlite'
-USER_ID = '31mibmh2agzvoj464raxvhazgi2a'
-TOKEN = 'BQByNq3Njkjhnp-36NYs7i84CwdyaJ5S2GT8D7TQx6KVxioQSk3daapNQR0ed7AP6mpu8sEguAkPEzbBlnFRWcNldd4oz-v9ebhqvSrUkDtpQ3v5e5OJkxIwHGHlFa45mhgn5sQasdvx79y2bzc2K-xJLuyYI0mLahVmQQdB'
+USER_ID = ''
+TOKEN = ''
 
 
 def check_if_valid_data(df: pd.DataFrame) -> bool:
